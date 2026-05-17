@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Daily Tasks">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Daily Supervisor Tasks</title>
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+body {
+    margin: 0;
+    padding: 18px;
+    background: #f4f5f7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color: #111827;
+}
+.wrap {
+    max-width: 720px;
+    margin: 0 auto;
+}
+.header {
+    background: #111827;
+    color: white;
+    padding: 22px 18px;
+    border-radius: 18px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+.header p {
+    margin: 8px 0 0;
+    color: #d1d5db;
+    font-size: 15px;
+}
+.progress {
+    background: white;
+    border-radius: 16px;
+    padding: 15px;
+    margin-bottom: 16px;
+    border: 1px solid #e5e7eb;
+}
+.progress-row {
+    display: flex;
+    justify-content: space-between;
+    color: #6b7280;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.bar {
+    background: #e5e7eb;
+    height: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.fill {
+    height: 100%;
+    width: 0%;
+    background: #111827;
+}
+.list {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+.task {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 20px;
+    line-height: 1.25;
+    cursor: pointer;
+}
+.task:last-child {
+    border-bottom: none;
+}
+.task input {
+    width: 30px;
+    height: 30px;
+    accent-color: #111827;
+    flex-shrink: 0;
+}
+.task.done {
+    background: #efefef;
+}
+.task.done span {
+    color: #8b8b8b;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+button {
+    flex: 1;
+    padding: 16px 10px;
+    border-radius: 15px;
+    border: 0;
+    font-size: 17px;
+    font-weight: 800;
+    background: #111827;
+    color: white;
+    cursor: pointer;
+}
+button.reset {
+    background: white;
+    color: #111827;
+    border: 1px solid #d1d5db;
+}
+.note {
+    text-align: center;
+    color: #6b7280;
+    margin-top: 14px;
+    font-size: 14px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <h1>Daily Supervisor Tasks</h1>
+        <p>Daily reminder checklist — completed items stay visible.</p>
+    </div>
+
+    <div class="progress">
+        <div class="progress-row">
+            <span id="count">0 of 16 complete</span>
+            <span id="percent">0%</span>
+        </div>
+        <div class="bar"><div class="fill" id="fill"></div></div>
+    </div>
+
+    <div class="list" id="taskList">
+        <label class="task" for="task0">
+        <input type="checkbox" id="task0" class="taskBox">
+        <span>Sales vs Last Year</span>
+    </label>
+<label class="task" for="task1">
+        <input type="checkbox" id="task1" class="taskBox">
+        <span>Labor Hours vs Earned Hours</span>
+    </label>
+<label class="task" for="task2">
+        <input type="checkbox" id="task2" class="taskBox">
+        <span>Cash +/-</span>
+    </label>
+<label class="task" for="task3">
+        <input type="checkbox" id="task3" class="taskBox">
+        <span>Drive-Thru</span>
+    </label>
+<label class="task" for="task4">
+        <input type="checkbox" id="task4" class="taskBox">
+        <span>Guest Reviews</span>
+    </label>
+<label class="task" for="task5">
+        <input type="checkbox" id="task5" class="taskBox">
+        <span>Any EZ Cater Orders</span>
+    </label>
+<label class="task" for="task6">
+        <input type="checkbox" id="task6" class="taskBox">
+        <span>Comped Receipt Match</span>
+    </label>
+<label class="task" for="task7">
+        <input type="checkbox" id="task7" class="taskBox">
+        <span>Pay Outs</span>
+    </label>
+<label class="task" for="task8">
+        <input type="checkbox" id="task8" class="taskBox">
+        <span>Refunds</span>
+    </label>
+<label class="task" for="task9">
+        <input type="checkbox" id="task9" class="taskBox">
+        <span>Approaching Overtime</span>
+    </label>
+<label class="task" for="task10">
+        <input type="checkbox" id="task10" class="taskBox">
+        <span>Verify Schedule</span>
+    </label>
+<label class="task" for="task11">
+        <input type="checkbox" id="task11" class="taskBox">
+        <span>Bank Deposit</span>
+    </label>
+<label class="task" for="task12">
+        <input type="checkbox" id="task12" class="taskBox">
+        <span>Tip Deposit</span>
+    </label>
+<label class="task" for="task13">
+        <input type="checkbox" id="task13" class="taskBox">
+        <span>Maintenance Issues</span>
+    </label>
+<label class="task" for="task14">
+        <input type="checkbox" id="task14" class="taskBox">
+        <span>Time In/Out Match Schedule</span>
+    </label>
+<label class="task" for="task15">
+        <input type="checkbox" id="task15" class="taskBox">
+        <span>Respond to Guest Complaints</span>
+    </label>
+    </div>
+
+    <div class="buttons">
+        <button class="reset" type="button" onclick="resetToday()">Reset Today</button>
+        <button type="button" onclick="markAllDone()">Mark All Done</button>
+    </div>
+
+    <div class="note">Saved on this device until you reset it.</div>
+</div>
+
+<script>
+const boxes = Array.from(document.querySelectorAll(".taskBox"));
+
+function updateScreen() {
+    let done = 0;
+    boxes.forEach((box) => {
+        const row = box.closest(".task");
+        row.classList.toggle("done", box.checked);
+        localStorage.setItem("dailyTask_" + box.id, box.checked ? "1" : "0");
+        if (box.checked) done++;
+    });
+    const total = boxes.length;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById("count").textContent = done + " of " + total + " complete";
+    document.getElementById("percent").textContent = pct + "%";
+    document.getElementById("fill").style.width = pct + "%";
+}
+
+function loadSaved() {
+    boxes.forEach((box) => {
+        box.checked = localStorage.getItem("dailyTask_" + box.id) === "1";
+        box.addEventListener("change", updateScreen);
+    });
+    updateScreen();
+}
+
+function resetToday() {
+    boxes.forEach((box) => box.checked = false);
+    updateScreen();
+}
+
+function markAllDone() {
+    boxes.forEach((box) => box.checked = true);
+    updateScreen();
+}
+
+window.addEventListener("load", loadSaved);
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+    });
+}
+</script>
+</body>
+</html>
